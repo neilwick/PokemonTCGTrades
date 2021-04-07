@@ -13,14 +13,14 @@
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 
-@if (@Model.WebUser != null) {
-    <h3>Welcome back, @Model.WebUser.Name</h3>
+@if (@Model.Member != null) {
+    <h3>Welcome back, @Model.Member.Name</h3>
 } else {
     <h3>Welcome, friend</h3>
 }
 
 <table>
-    <thead>
+    @* <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(m => m.Products[0].Name)
@@ -35,8 +35,8 @@
                 @Html.DisplayNameFor(m => m.Products[0].Description)
             </th>
         </tr>
-    </thead>
-    @foreach (var item in Model.Products)
+    </thead> *@
+    @* @foreach (var item in Model.Products)
     {
         <tr>
             <td>@Html.DisplayFor(i=> item.Name)</td>
@@ -47,5 +47,5 @@
                 <a asp-page="./Edit" asp-route-id="@item.ProductID">Edit</a>
             </td>
         </tr>
-    }
+    } *@
 </table>

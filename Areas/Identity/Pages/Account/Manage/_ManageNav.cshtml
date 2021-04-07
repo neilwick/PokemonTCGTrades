@@ -1,5 +1,5 @@
 @using PokemonTCGTrades.Models
-@inject SignInManager<WebUser> SignInManager
+@inject SignInManager<Member> SignInManager
 @{
         var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }

@@ -16,9 +16,9 @@ namespace PokemonTCGTrades.Pages
         private readonly ILogger<IndexModel> _logger;
         private readonly StoreContext _context;
 
-        private readonly UserManager<WebUser> _userManager;
+        private readonly UserManager<Member> _userManager;
 
-        public IndexModel(ILogger<IndexModel> logger, StoreContext context, UserManager<WebUser> userManager)
+        public IndexModel(ILogger<IndexModel> logger, StoreContext context, UserManager<Member> userManager)
         {
             _logger = logger;
             _context = context;
@@ -26,15 +26,15 @@ namespace PokemonTCGTrades.Pages
         }
 
         public IList<Product> Products { get; set; }
-        public WebUser WebUser {get; set;}
+        public Member Member {get; set;}
 
         public async Task OnGetAsync()
         {
             if (User.Identity.IsAuthenticated) {
-                WebUser = await _userManager.GetUserAsync(User);
+                Member = await _userManager.GetUserAsync(User);
             }
-            var products = from product in _context.Products select product;
-            Products = await products.ToListAsync();
+            // var products = from product in _context.Products select product;
+            // Products = await products.ToListAsync();
         }
     }
 }

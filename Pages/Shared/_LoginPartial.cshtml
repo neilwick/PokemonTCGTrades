@@ -1,7 +1,7 @@
 @using Microsoft.AspNetCore.Identity
 @using PokemonTCGTrades.Models
-@inject SignInManager<WebUser> SignInManager
-@inject UserManager<WebUser> UserManager
+@inject SignInManager<Member> SignInManager
+@inject UserManager<Member> UserManager
 
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))

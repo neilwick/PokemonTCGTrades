@@ -30,7 +30,7 @@ namespace PokemonTCGTrades
                 ServerVersion.FromString(Configuration.GetValue<string>("mariadb-version"))
             ));
 
-            services.AddDefaultIdentity<WebUser>(opt => opt.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<Member>(opt => opt.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<StoreContext>();
         }
 

@@ -12,12 +12,12 @@ namespace PokemonTCGTrades.Areas.Identity.Pages.Account.Manage
 {
     public partial class IndexModel : PageModel
     {
-        private readonly UserManager<WebUser> _userManager;
-        private readonly SignInManager<WebUser> _signInManager;
+        private readonly UserManager<Member> _userManager;
+        private readonly SignInManager<Member> _signInManager;
 
         public IndexModel(
-            UserManager<WebUser> userManager,
-            SignInManager<WebUser> signInManager)
+            UserManager<Member> userManager,
+            SignInManager<Member> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -47,7 +47,7 @@ namespace PokemonTCGTrades.Areas.Identity.Pages.Account.Manage
             public DateTime Birthday { get; set; }
         }
 
-        private async Task LoadAsync(WebUser user)
+        private async Task LoadAsync(Member user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);

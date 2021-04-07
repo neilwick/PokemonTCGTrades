@@ -20,14 +20,14 @@ namespace PokemonTCGTrades.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class RegisterModel : PageModel
     {
-        private readonly SignInManager<WebUser> _signInManager;
-        private readonly UserManager<WebUser> _userManager;
+        private readonly SignInManager<Member> _signInManager;
+        private readonly UserManager<Member> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
         public RegisterModel(
-            UserManager<WebUser> userManager,
-            SignInManager<WebUser> signInManager,
+            UserManager<Member> userManager,
+            SignInManager<Member> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
@@ -85,7 +85,7 @@ namespace PokemonTCGTrades.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new WebUser
+                var user = new Member
                 {
                     UserName = Input.Email,
                     Email = Input.Email,

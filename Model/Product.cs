@@ -17,7 +17,6 @@ namespace PokemonTCGTrades.Models
         [Display(Name = "Product Description")]
         public string Description { get; set; }
 
-        public virtual ICollection<Rating> Ratings { get; set; }
 
     }
 }
