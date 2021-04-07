@@ -25,7 +25,7 @@ namespace PokemonTCGTrades.Pages
             _userManager = userManager;
         }
 
-        public IList<Product> Products { get; set; }
+        public IList<Listing> Listings { get; set; }
         public Member Member {get; set;}
 
         public async Task OnGetAsync()

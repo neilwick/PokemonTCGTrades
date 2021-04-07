@@ -1,4 +1,5 @@
 ﻿@page
+@using PokemonTCGTrades.Pages
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
@@ -20,32 +21,32 @@
 }
 
 <table>
-    @* <thead>
+    <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(m => m.Products[0].Name)
+                @Html.DisplayNameFor(m => m.Listings[0].MemberID)
             </th>
             <th>
-                @Html.DisplayNameFor(m => m.Products[0].Price)
+                @Html.DisplayNameFor(m => m.Listings[0].CardID)
             </th>
             <th>
-                @Html.DisplayNameFor(m => m.Products[0].Stock)
+                @Html.DisplayNameFor(m => m.Listings[0].Condition)
             </th>
             <th>
-                @Html.DisplayNameFor(m => m.Products[0].Description)
+                @Html.DisplayNameFor(m => m.Listings[0].IsWanted)
             </th>
         </tr>
-    </thead> *@
-    @* @foreach (var item in Model.Products)
+    </thead>
+    @* @foreach (var item in Model.Listings)
     {
         <tr>
-            <td>@Html.DisplayFor(i=> item.Name)</td>
-            <td>@Html.DisplayFor(i => item.Price)</td>
-            <td>@Html.DisplayFor(i => item.Stock)</td>
-            <td>@Html.DisplayFor(i => item.Description)</td>
+            <td>@Html.DisplayFor(i=> item.MemberID)</td>
+            <td>@Html.DisplayFor(i => item.CardID)</td>
+            <td>@Html.DisplayFor(i => item.Condition)</td>
+            <td>@Html.DisplayFor(i => item.IsWanted)</td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.ProductID">Edit</a>
+                <a asp-page="./Edit" asp-route-id="@item.ListingID">Edit</a>
             </td>
         </tr>
-    } *@
+    }*@
 </table>
