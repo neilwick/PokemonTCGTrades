@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PokemonTCGTrades.Migrations
 {
-    public partial class NewDatabase : Migration
+    public partial class DataSetup : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -30,6 +30,10 @@ namespace PokemonTCGTrades.Migrations
                     Discriminator = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: false),
                     Name = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
                     Birthday = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    Description = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
+                    PostalCode = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
+                    Balance = table.Column<decimal>(type: "decimal(8,2)", nullable: true),
+                    DealsCompleted = table.Column<uint>(type: "int unsigned", nullable: true),
                     UserName = table.Column<string>(type: "varchar(256) CHARACTER SET utf8mb4", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "varchar(256) CHARACTER SET utf8mb4", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "varchar(256) CHARACTER SET utf8mb4", maxLength: 256, nullable: true),
@@ -51,19 +55,21 @@ namespace PokemonTCGTrades.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Products",
+                name: "Listings",
                 columns: table => new
                 {
-                    ProductID = table.Column<uint>(type: "int unsigned", nullable: false)
+                    ListingID = table.Column<uint>(type: "int unsigned", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
-                    Price = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
-                    Stock = table.Column<uint>(type: "int unsigned", nullable: false),
-                    Description = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true)
+                    MemberID = table.Column<string>(type: "varchar(255)", nullable: false),
+                    CardID = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
+                    Description = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
+                    Condition = table.Column<string>(type: "varchar(10) CHARACTER SET utf8mb4", maxLength: 10, nullable: true),
+                    IsWanted = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    OnHold = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Products", x => x.ProductID);
+                    table.PrimaryKey("PK_Listings", x => x.ListingID);
                 });
 
             migrationBuilder.CreateTable(
@@ -172,27 +178,6 @@ namespace PokemonTCGTrades.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Ratings",
-                columns: table => new
-                {
-                    RatingID = table.Column<uint>(type: "int unsigned", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Score = table.Column<uint>(type: "int unsigned", nullable: false),
-                    Comment = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
-                    ProductID = table.Column<uint>(type: "int unsigned", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Ratings", x => x.RatingID);
-                    table.ForeignKey(
-                        name: "FK_Ratings_Products_ProductID",
-                        column: x => x.ProductID,
-                        principalTable: "Products",
-                        principalColumn: "ProductID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -229,11 +214,6 @@ namespace PokemonTCGTrades.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Ratings_ProductID",
-                table: "Ratings",
-                column: "ProductID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -254,16 +234,13 @@ namespace PokemonTCGTrades.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Ratings");
+                name: "Listings");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Products");
         }
     }
 }

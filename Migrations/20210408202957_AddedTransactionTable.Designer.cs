@@ -9,8 +9,8 @@ using PokemonTCGTrades.Models;
 namespace PokemonTCGTrades.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20210407170000_NewDatabase")]
-    partial class NewDatabase
+    [Migration("20210408202957_AddedTransactionTable")]
+    partial class AddedTransactionTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -221,60 +221,64 @@ namespace PokemonTCGTrades.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("PokemonTCGTrades.Models.Product", b =>
+            modelBuilder.Entity("PokemonTCGTrades.Models.Listing", b =>
                 {
-                    b.Property<uint>("ProductID")
+                    b.Property<uint>("ListingID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int unsigned");
+
+                    b.Property<string>("CardID")
+                        .HasColumnType("varchar(15)");
+
+                    b.Property<string>("Condition")
+                        .HasMaxLength(10)
+                        .HasColumnType("varchar(10) CHARACTER SET utf8mb4");
 
                     b.Property<string>("Description")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(300)");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                    b.Property<bool>("IsWanted")
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(8,2)");
+                    b.Property<string>("MemberID")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
 
-                    b.Property<uint>("Stock")
-                        .HasColumnType("int unsigned");
+                    b.Property<bool>("OnHold")
+                        .HasColumnType("tinyint(1)");
 
-                    b.HasKey("ProductID");
+                    b.HasKey("ListingID");
 
-                    b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("PokemonTCGTrades.Models.Rating", b =>
-                {
-                    b.Property<uint>("RatingID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int unsigned");
-
-                    b.Property<string>("Comment")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<uint?>("ProductID")
-                        .HasColumnType("int unsigned");
-
-                    b.Property<uint>("Score")
-                        .HasColumnType("int unsigned");
-
-                    b.HasKey("RatingID");
-
-                    b.HasIndex("ProductID");
-
-                    b.ToTable("Ratings");
+                    b.ToTable("Listings");
                 });
 
             modelBuilder.Entity("PokemonTCGTrades.Models.Member", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
+                    b.Property<decimal>("Balance")
+                        .HasColumnType("decimal(8,2)");
+
                     b.Property<DateTime>("Birthday")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                    b.Property<uint>("DealsCompleted")
+                        .HasColumnType("int unsigned");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("varchar(300)");
+
+                    b.Property<DateTime>("JoinedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("MemberName")
+                        .HasColumnType("varchar(30)");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("PostalCode")
+                        .HasColumnType("varchar(10)");
 
                     b.HasDiscriminator().HasValue("Member");
                 });
@@ -328,20 +332,6 @@ namespace PokemonTCGTrades.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("PokemonTCGTrades.Models.Rating", b =>
-                {
-                    b.HasOne("PokemonTCGTrades.Models.Product", "Product")
-                        .WithMany("Ratings")
-                        .HasForeignKey("ProductID");
-
-                    b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("PokemonTCGTrades.Models.Product", b =>
-                {
-                    b.Navigation("Ratings");
                 });
 #pragma warning restore 612, 618
         }

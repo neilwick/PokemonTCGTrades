@@ -9,8 +9,8 @@ using PokemonTCGTrades.Models;
 namespace PokemonTCGTrades.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20210407205021_CardIDToString")]
-    partial class CardIDToString
+    [Migration("20210408183119_DataSetup")]
+    partial class DataSetup
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -231,7 +231,8 @@ namespace PokemonTCGTrades.Migrations
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Condition")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasMaxLength(10)
+                        .HasColumnType("varchar(10) CHARACTER SET utf8mb4");
 
                     b.Property<string>("Description")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
@@ -239,8 +240,9 @@ namespace PokemonTCGTrades.Migrations
                     b.Property<bool>("IsWanted")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<uint>("MemberID")
-                        .HasColumnType("int unsigned");
+                    b.Property<string>("MemberID")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
 
                     b.Property<bool>("OnHold")
                         .HasColumnType("tinyint(1)");

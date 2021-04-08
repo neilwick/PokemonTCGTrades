@@ -89,7 +89,7 @@ namespace PokemonTCGTrades.Areas.Identity.Pages.Account
                 {
                     UserName = Input.Email,
                     Email = Input.Email,
-                    Name = Input.Name,
+                    MemberName = Input.Name,
                     Birthday = Input.Birthday
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);

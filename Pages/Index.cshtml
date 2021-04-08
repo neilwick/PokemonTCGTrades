@@ -15,7 +15,7 @@
 </div>
 
 @if (@Model.Member != null) {
-    <h3>Welcome back, @Model.Member.Name</h3>
+    <h3>Welcome back, @Model.Member.MemberName</h3>
 } else {
     <h3>Welcome, friend</h3>
 }
@@ -40,13 +40,10 @@
     @* @foreach (var item in Model.Listings)
     {
         <tr>
-            <td>@Html.DisplayFor(i=> item.MemberID)</td>
+            <td>@Html.DisplayFor(i => item.MemberID)</td>
             <td>@Html.DisplayFor(i => item.CardID)</td>
             <td>@Html.DisplayFor(i => item.Condition)</td>
             <td>@Html.DisplayFor(i => item.IsWanted)</td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.ListingID">Edit</a>
-            </td>
         </tr>
-    }*@
+    } *@
 </table>

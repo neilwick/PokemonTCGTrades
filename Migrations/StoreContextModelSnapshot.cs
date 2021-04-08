@@ -226,19 +226,21 @@ namespace PokemonTCGTrades.Migrations
                         .HasColumnType("int unsigned");
 
                     b.Property<string>("CardID")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(15)");
 
                     b.Property<string>("Condition")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasMaxLength(10)
+                        .HasColumnType("varchar(10) CHARACTER SET utf8mb4");
 
                     b.Property<string>("Description")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(300)");
 
                     b.Property<bool>("IsWanted")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<uint>("MemberID")
-                        .HasColumnType("int unsigned");
+                    b.Property<string>("MemberID")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
 
                     b.Property<bool>("OnHold")
                         .HasColumnType("tinyint(1)");
@@ -262,13 +264,19 @@ namespace PokemonTCGTrades.Migrations
                         .HasColumnType("int unsigned");
 
                     b.Property<string>("Description")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(300)");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                    b.Property<DateTime>("JoinedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("MemberName")
+                        .HasColumnType("varchar(30)");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("PostalCode")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .HasColumnType("varchar(10)");
 
                     b.HasDiscriminator().HasValue("Member");
                 });

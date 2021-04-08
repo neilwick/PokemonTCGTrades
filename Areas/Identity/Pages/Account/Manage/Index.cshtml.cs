@@ -57,7 +57,7 @@ namespace PokemonTCGTrades.Areas.Identity.Pages.Account.Manage
             Input = new InputModel
             {
                 PhoneNumber = phoneNumber,
-                Name = user.Name,
+                Name = user.MemberName,
                 Birthday = user.Birthday
             };
         }
@@ -101,9 +101,9 @@ namespace PokemonTCGTrades.Areas.Identity.Pages.Account.Manage
                 }
             }
 
-            if (Input.Name != user.Name)
+            if (Input.Name != user.MemberName)
             {
-                user.Name = Input.Name;
+                user.MemberName = Input.Name;
             }
             if (Input.Birthday != user.Birthday)
             {
