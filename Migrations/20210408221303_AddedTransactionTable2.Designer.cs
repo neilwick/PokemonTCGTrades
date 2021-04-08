@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PokemonTCGTrades.Models;
 
 namespace PokemonTCGTrades.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    partial class StoreContextModelSnapshot : ModelSnapshot
+    [Migration("20210408221303_AddedTransactionTable2")]
+    partial class AddedTransactionTable2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -248,43 +250,6 @@ namespace PokemonTCGTrades.Migrations
                     b.HasKey("ListingID");
 
                     b.ToTable("Listings");
-                });
-
-            modelBuilder.Entity("PokemonTCGTrades.Models.Transaction", b =>
-                {
-                    b.Property<uint>("TransactionID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int unsigned");
-
-                    b.Property<bool>("Completed")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<bool>("InProgress")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<uint>("ListingID")
-                        .HasColumnType("int unsigned");
-
-                    b.Property<uint>("PaymentID")
-                        .HasColumnType("int unsigned");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(6,2)");
-
-                    b.Property<string>("ReceiverID")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("SenderID")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<DateTime>("TimeStamp")
-                        .HasColumnType("DateTime");
-
-                    b.HasKey("TransactionID");
-
-                    b.ToTable("Transactions");
                 });
 
             modelBuilder.Entity("PokemonTCGTrades.Models.Member", b =>
