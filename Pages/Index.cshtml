@@ -14,8 +14,10 @@
 </div>
 
 @if (@Model.Member != null) {
-    <h3>Welcome back, @Model.Member.MemberName @Model.Member.Id</h3>
+    <h3>Welcome back, @Model.Member.MemberName</h3>
 
+    <h4>Cards you want</h4>
+    if(@Model.WantList.Count > 0) {
 <table>
     <thead>
         <tr>
@@ -33,7 +35,7 @@
             </th>
         </tr>
     </thead>
-    @foreach (var item in Model.Listings)
+    @foreach (var item in Model.WantList)
     {
         <tr>
             <td>@Html.DisplayFor(i => item.Member.MemberName)</td>
@@ -43,6 +45,42 @@
         </tr>
     }
 </table>
+    } else {
+        <p>You have nothing in your want list.</p>
+    }
+    <hr />
+    <h4>Cards you are offering</h4>
+    if(@Model.OfferList.Count > 0) {
+<table>
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(m => m.Listings[0].Member.MemberName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(m => m.Listings[0].CardID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(m => m.Listings[0].Condition)
+            </th>
+            <th>
+                @Html.DisplayNameFor(m => m.Listings[0].IsWanted)
+            </th>
+        </tr>
+    </thead>
+    @foreach (var item in Model.OfferList)
+    {
+        <tr>
+            <td>@Html.DisplayFor(i => item.Member.MemberName)</td>
+            <td>@Html.DisplayFor(i => item.CardID)</td>
+            <td>@Html.DisplayFor(i => item.Condition)</td>
+            <td>@Html.DisplayFor(i => item.IsWanted)</td>
+        </tr>
+    }
+</table>
+    } else {
+        <p>You have nothing in your offer list.</p>
+    }
 } else {
     <h3>Welcome, friend</h3>
 }

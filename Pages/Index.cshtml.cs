@@ -26,6 +26,8 @@ namespace PokemonTCGTrades.Pages
         }
 
         public IList<Listing> Listings { get; set; }
+        public IList<Listing> WantList { get; set; }
+        public IList<Listing> OfferList { get; set; }
         public Member Member {get; set;}
 
         public async Task OnGetAsync()
@@ -33,10 +35,10 @@ namespace PokemonTCGTrades.Pages
             if (User.Identity.IsAuthenticated) {
                 Member = await _userManager.GetUserAsync(User);
                 var loc = await _context.Members.Where(m => m.MemberName == Member.MemberName)
-                .Include(l => l.Listings).FirstOrDefaultAsync<Member>();
-                Listings = loc.Listings.Where(l => l.IsWanted).ToList();
+                    .Include(l => l.Listings).FirstOrDefaultAsync<Member>();
+                OfferList = loc.Listings.Where(l => !l.IsWanted).ToList();
+                WantList = loc.Listings.Where(l => l.IsWanted).ToList();
 
-                
             }
         }
     }

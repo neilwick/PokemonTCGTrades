@@ -32,6 +32,7 @@ namespace PokemonTCGTrades.Models
         public uint DealsCompleted { get; set; }
 
         public virtual ICollection<Listing> Listings { get; set; }
+        public virtual ICollection<Transaction> Transactions { get; set; }
 
     }
 
