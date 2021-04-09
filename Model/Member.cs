@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
@@ -29,6 +30,8 @@ namespace PokemonTCGTrades.Models
         public DateTime JoinedDate { get; set; }
         [PersonalData]
         public uint DealsCompleted { get; set; }
+
+        public virtual ICollection<Listing> Listings { get; set; }
 
     }
 

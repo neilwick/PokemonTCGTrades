@@ -64,6 +64,7 @@ namespace PokemonTCGTrades.Areas.Identity.Pages.Account
 
             [Required]
             [DataType(DataType.Date)]
+            [Display(Name = "Date of Birth")]
             public DateTime Birthday { get; set; }
 
 

@@ -32,9 +32,12 @@ namespace PokemonTCGTrades.Pages
         {
             if (User.Identity.IsAuthenticated) {
                 Member = await _userManager.GetUserAsync(User);
+                var loc = await _context.Members.Where(m => m.MemberName == Member.MemberName)
+                .Include(l => l.Listings).FirstOrDefaultAsync<Member>();
+                Listings = loc.Listings.Where(l => l.IsWanted).ToList();
+
+                
             }
-            // var products = from product in _context.Products select product;
-            // Products = await products.ToListAsync();
         }
     }
 }
