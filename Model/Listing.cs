@@ -7,7 +7,6 @@ namespace PokemonTCGTrades.Models
     public class Listing
     {
         public uint ListingID { get; set; }
-        [Column(TypeName="varchar(255)")]
         public virtual Member Member { get; set; }
         [Column(TypeName="varchar(15)")]
         public string CardID { get; set; }

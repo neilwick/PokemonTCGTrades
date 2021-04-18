@@ -1,0 +1,54 @@
+﻿body {
+    
+}
+
+#topc {
+    background-color:mintcream;
+}
+
+.text-center {
+    border: 4px ridge lightgray;
+}
+
+.borderwith
+{
+    border: 4px ridge lightgray;
+}
+
+.reg {
+    font-size: 22px;
+    color: gray;
+}
+
+.tradelist
+{
+   
+    margin: 15px 45px 15px 60px;
+}
+
+
+.alist
+{
+    font-size: 24px;
+    text-decoration:none;
+    color:sienna;  
+    
+}
+
+.dash {
+    font-size: 22px;
+    text-decoration: none;
+    color: darkred;
+    float:right;
+    margin-right:30px;
+}
+
+.dashlist {
+    margin: 30px 30px 30px 30px;
+}
+
+#user
+{
+    color:sienna;
+}
+

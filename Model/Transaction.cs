@@ -8,11 +8,9 @@ namespace PokemonTCGTrades.Models
     public class Transaction
     {
         public uint TransactionID { get; set; }
-        [Column(TypeName="varchar(255)")]
-        public uint SenderID { get; set; }
-        [Column(TypeName="varchar(255)")]
-        public uint ReceiverID { get; set; }
-        public uint ListingID { get; set; }
+        public virtual Member Sender { get; set; }
+        public virtual Member Receiver { get; set; }
+        public virtual Listing Listing { get; set; }
         [Column(TypeName="decimal(6, 2)")]
         public decimal Price { get; set; }
         [Column(TypeName="DateTime")]
