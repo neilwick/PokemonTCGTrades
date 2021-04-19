@@ -11,6 +11,8 @@
 
 <div class="text-center">
     <h1 class="display-4">Local Pok&eacute;mon card trading</h1>
+
+    <img src="~/images/bg.JPG" alt="" />
 </div>
 
 @if (@Model.Member != null) {
@@ -31,7 +33,10 @@
                 @Html.DisplayNameFor(m => m.Listings[0].Condition)
             </th>
             <th>
-                @Html.DisplayNameFor(m => m.Listings[0].IsWanted)
+                @Html.DisplayNameFor(m => m.Listings[0].Description)
+            </th>
+                  <th>
+                @Html.DisplayNameFor(m => m.Listings[0].OnHold)
             </th>
         </tr>
     </thead>
@@ -41,8 +46,10 @@
             <td>@Html.DisplayFor(i => item.Member.MemberName)</td>
             <td>@Html.DisplayFor(i => item.CardID)</td>
             <td>@Html.DisplayFor(i => item.Condition)</td>
-            <td>@Html.DisplayFor(i => item.IsWanted)</td>
+            <td>@Html.DisplayFor(i => item.Description)</td>
+            <td>@Html.DisplayFor(i => item.OnHold)</td>
         </tr>
+
     }
 </table>
     } else {
@@ -64,9 +71,12 @@
                 @Html.DisplayNameFor(m => m.Listings[0].Condition)
             </th>
             <th>
-                @Html.DisplayNameFor(m => m.Listings[0].IsWanted)
+                @Html.DisplayNameFor(m => m.Listings[0].Description)
             </th>
-        </tr>
+            <th>
+                @Html.DisplayNameFor(m => m.Listings[0].OnHold)
+            </th>
+             </tr>
     </thead>
     @foreach (var item in Model.OfferList)
     {
@@ -74,13 +84,15 @@
             <td>@Html.DisplayFor(i => item.Member.MemberName)</td>
             <td>@Html.DisplayFor(i => item.CardID)</td>
             <td>@Html.DisplayFor(i => item.Condition)</td>
-            <td>@Html.DisplayFor(i => item.IsWanted)</td>
+            <td>@Html.DisplayFor(i => item.Description)</td>
+            <td>@Html.DisplayFor(i => item.OnHold)</td>
         </tr>
+
     }
 </table>
     } else {
         <p>You have nothing in your offer list.</p>
     }
 } else {
-    <h3>Welcome, friend</h3>
+    <h3>Welcome, friend. Register or login to begin.</h3>
 }

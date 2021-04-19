@@ -1,8 +1,4 @@
-﻿body {
-    
-}
-
-#topc {
+﻿#topc {
     background-color:mintcream;
 }
 
@@ -18,6 +14,7 @@
 .reg {
     font-size: 22px;
     color: gray;
+    text-align: left;
 }
 
 .tradelist

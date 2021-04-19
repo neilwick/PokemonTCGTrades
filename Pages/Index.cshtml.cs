@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using PokemonTCGTrades.Models;
 using Microsoft.AspNetCore.Identity;
+using Model.Cards;
+using System.Net.Http;
+using System.Text.Json;
 
 namespace PokemonTCGTrades.Pages
 {
@@ -15,7 +18,8 @@ namespace PokemonTCGTrades.Pages
     {
         private readonly ILogger<IndexModel> _logger;
         private readonly StoreContext _context;
-
+        private HttpClient httpClient = new HttpClient();
+        public Card card { get; set; }
         private readonly UserManager<Member> _userManager;
 
         public IndexModel(ILogger<IndexModel> logger, StoreContext context, UserManager<Member> userManager)
@@ -37,9 +41,29 @@ namespace PokemonTCGTrades.Pages
                 var loc = await _context.Members.Where(m => m.MemberName == Member.MemberName)
                     .Include(l => l.Listings).FirstOrDefaultAsync<Member>();
                 OfferList = loc.Listings.Where(l => !l.IsWanted).ToList();
+                foreach (Listing l in OfferList) {
+                    HttpResponseMessage response = await httpClient.GetAsync("https://api.pokemontcg.io/v2/cards/" + l.CardID);
+
+                    if (response.IsSuccessStatusCode) {
+
+                        var dataStream = await response.Content.ReadAsStreamAsync();
+
+                        card = await JsonSerializer.DeserializeAsync<Card>(
+                                dataStream,
+                                new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+                            );
+
+                        // l.Name = card.Name;
+                    }
+                }
+
                 WantList = loc.Listings.Where(l => l.IsWanted).ToList();
 
             }
+
+
         }
+
+
     }
 }

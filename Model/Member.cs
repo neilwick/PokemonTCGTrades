@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
@@ -12,6 +13,7 @@ namespace PokemonTCGTrades.Models
 
         [PersonalData]
         [Column(TypeName="varchar(30)")]
+        [DisplayName("Member Name")]
         public string MemberName { get; set; }
         [PersonalData]
         public DateTime Birthday { get; set; }
